@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          .box {
+               text-align: center;
+               width: 60%;
+               margin: auto;
+          }
+
+          .box input {
+               width: 60%;
+               display: block;
+               margin: 22px auto;
+               height: 30px;
+               font-size: 18px;
+          }
+
+          table {
+               margin: 0 auto;
+               width: 100%;
+               font-size: 23px;
+               border: 1px solid black;
+               border-collapse: collapse;
+          }
+
+          table tr th,
+          td {
+
+               border: 1px solid black;
+          }
+
+          .box button {
+               padding: 4px 26px;
+               font-size: 16px;
+               margin-bottom: 15px;
+          }
+
+          @media only screen and (max-width: 576px) {
+
+               .box {
+                    width: 100%;
+               }
+
+               .box button {
+                    background: black;
+                    color: #fff;
+               }
+
+               .box input {
+                    width: 80%;
+               }
+          }
+     </style>
+</head>
+
+<body>
+     <div class="box">
+
+          <input type="text" placeholder="name" id="input" onkeyup="search(this.value)">
+          <button onclick="generatepush()">push</button>
+          <button onclick="updatedata()">update</button>
+          <table>
+               <tr>
+                    <th>S.no</th>
+                    <th>Name</th>
+                    <th>Action</th>
+
+               </tr>
+               <tbody id="tablebody">
+
+               </tbody>
+          </table>
+     </div>
+
+     <script>
+
+          let array = []
+          let selectedIndex;
+          function pushdata(data) {
+
+               let element = document.getElementById('tablebody');
+               let row = ''
+               for (let i = 0; i < data.length; i++) {
+
+                    row = row + `<tr>
+                         <td>${i + 1}</td>
+                         <td>${data[i]}</td>
+                         <td><button onclick='deletdata(${i})'>delet</button><button onclick='editelemet(${i})'>edit</button></td>
+                         
+                         </tr>`
+               }
+               element.innerHTML = row
+
+          }
+
+          function generatepush() {
+               let data = document.getElementById('input').value;
+               array.push(data)
+               pushdata(array)
+               document.getElementById('input').value = ''
+
+          }
+
+          function deletdata(index) {
+               array.splice(index, 1)
+               pushdata(array)
+
+          }
+
+          function editelemet(index) {
+
+               selectedIndex = index
+               document.getElementById('input').value = array[index]
+          }
+
+          function updatedata() {
+               let value = document.getElementById('input').value;
+               array[selectedIndex] = value;
+               pushdata(array)
+          }
+
+          function search(value) {
+
+          }
+
+
+
+     </script>
+</body>
+
+</html>
