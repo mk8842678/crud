@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          .box {
+               text-align: center;
+               /* margin-bottom: 55px; */
+          }
+
+          .box input {
+               height: 35px;
+               width: 300px;
+          }
+
+          .box button {
+               padding: 8px 25px;
+               font-size: 15px;
+          }
+
+          table {
+               margin: 0 auto;
+               border-collapse: collapse;
+          }
+
+          table tr th {
+               font-size: 25px;
+               padding: 0 43px;
+               border: 2px solid black;
+
+
+          }
+
+          table tr th input {
+               width: 22px;
+               height: 23px;
+               margin: 8px 0px;
+          }
+
+
+          tbody {
+               font-size: 23px;
+               border: 2px solid black;
+               text-align: center;
+          }
+
+
+          tbody td {
+               border: 2px solid black;
+          }
+
+          tbody td input {
+
+               width: 22px;
+               height: 23px;
+               margin: 8px 0px;
+          }
+
+          #search {
+               height: 33px;
+               width: 210px;
+          }
+
+          .box #deleteall {
+
+               margin: 22px 495px;
+               display: none;
+          }
+
+
+          @media only screen and (max-width: 576px) {
+
+               table tr th {
+                    padding: 0px 14px;
+               }
+
+               .box #deleteall {
+                    margin: 10px 0px;
+               }
+          }
+     </style>
+
+</head>
+
+<body>
+     <div class="box">
+          <input type="text" placeholder="data" id="input">
+
+          <button onclick="generatedata()">push</button>
+          <button onclick="updatedata()">update</button>
+          <input type="text" placeholder="search" id="search" onkeyup="searchdata(this.value)">
+          <button id="deleteall" onclick="boxDelete()">Deleteall</button><br>
+
+     </div>
+     <table>
+          <tr>
+               <th><input type="checkbox" name="" id="comman()"></th>
+               <th>s.no</th>
+               <th>data</th>
+               <th>action</th>
+          </tr>
+
+          <tbody id="tablebody">
+
+          </tbody>
+     </table>
+
+     <script>
+
+          let arry = []
+          let selectedIndex
+          let selectedrow = []
+          function generatehtml(data) {
+
+               let element = document.getElementById('tablebody');
+               let row = ''
+               for (let i = 0; i < data.length; i++) {
+                    row = row + `<tr>
+                         <td><input type='checkbox' name='' id='' onclick='checkBoxClicked(this,${i})'</td>
+                         <td>${i + 1}</td>
+                         <td>${data[i]}</td>
+                         <td><button onclick='deletelement(${i})'>delete</button>
+                              <button onclick='editelement(${i})'>edit</button>
+                              </td>
+                        
+                         </tr>`
+               }
+               element.innerHTML = row
+          }
+
+          // ***********************************
+
+          function generatedata() {
+
+               let data = document.getElementById('input').value;
+               arry.push(data)
+               generatehtml(arry)
+               document.getElementById('input').value = ''
+          }
+          // ***************************************
+
+          function deletelement(index) {
+               arry.splice(index, 1)
+               generatehtml(arry)
+          }
+          // ***************************************
+          function editelement(index) {
+
+               selectedIndex = index
+               document.getElementById('input').value = arry[index]
+          }
+          // **************************************
+
+          function updatedata() {
+
+               let value = document.getElementById('input').value;
+               arry[selectedIndex] = value
+               generatehtml(arry)
+          }
+          // *********************************
+
+          function searchdata(value) {
+
+               let findarray = []
+
+               for (let i = 0; i < arry.length; i++) {
+
+                    if (arry[i] == value) {
+
+                         findarray.push(arry[i])
+                    }
+               }
+               generatehtml(findarray)
+
+          }
+          // **************************************
+
+          function checkBoxClicked(evet, index) {
+
+               if (evet.checked) {
+                    selectedrow.push(index)
+               }
+               else {
+                    selectedrow.splice(index, 1)
+               }
+
+               let deleteallButton = document.getElementById('deleteall')
+
+               if (selectedrow.length > 0) {
+                    deleteallButton.style.display = 'block'
+               }
+               else {
+                    deleteallButton.style.display = 'none'
+               }
+
+          }
+          // ******************************************
+          function boxDelete() {
+
+               let deleteallButton = document.getElementById('deleteall')
+               let remaingItems = []
+
+               for (let i = 0; i < arry.length; i++) {
+
+                    if (!selectedrow.includes(i)) {
+                         remaingItems.push(array[i])
+
+                    }
+               }
+               generatehtml(remaingItems)
+               arry = remaingItems
+               selectedrow.length = 0
+
+               if (selectedrow.length > 0) {
+
+                    deleteallButton.style.display = 'block'
+               }
+               else {
+                    deleteallButton.style.display = 'none'
+               }
+
+          }
+
+
+
+
+
+     </script>
+
+</body>
+
+</html>

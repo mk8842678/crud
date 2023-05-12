@@ -5,12 +5,13 @@
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Document</title>
+     <title>cruds practice</title>
      <style>
           .box {
                text-align: center;
                width: 60%;
                margin: auto;
+               position: relative;
           }
 
           .box input {
@@ -32,6 +33,7 @@
           table tr th,
           td {
 
+
                border: 1px solid black;
           }
 
@@ -39,6 +41,16 @@
                padding: 4px 26px;
                font-size: 16px;
                margin-bottom: 15px;
+          }
+
+          #deleteall {
+               position: absolute;
+               left: 0;
+
+          }
+
+          #search {
+               width: 258px;
           }
 
           @media only screen and (max-width: 576px) {
@@ -55,6 +67,11 @@
                .box input {
                     width: 80%;
                }
+
+               #search {
+                    width: 57%;
+                    margin: 15px 61px;
+               }
           }
      </style>
 </head>
@@ -62,11 +79,15 @@
 <body>
      <div class="box">
 
-          <input type="text" placeholder="name" id="input" onkeyup="search(this.value)">
+          <input type="text" placeholder="name" id="input">
+          <button id="deleteall" onclick="boxDelete()" style="display: none;">Deleteall</button>
           <button onclick="generatepush()">push</button>
           <button onclick="updatedata()">update</button>
+          <input type="text" placeholder="search" id="search" onkeyup="search(this.value)">
+
           <table>
                <tr>
+                    <th><input type="checkbox" name="" id="comman()"></th>
                     <th>S.no</th>
                     <th>Name</th>
                     <th>Action</th>
@@ -82,6 +103,7 @@
 
           let array = []
           let selectedIndex;
+          let selectedRow = []
           function pushdata(data) {
 
                let element = document.getElementById('tablebody');
@@ -89,6 +111,7 @@
                for (let i = 0; i < data.length; i++) {
 
                     row = row + `<tr>
+                    <td><input type="checkbox" name="" id="" onclick="checkBoxClicked(this,${i})"></td>
                          <td>${i + 1}</td>
                          <td>${data[i]}</td>
                          <td><button onclick='deletdata(${i})'>delet</button><button onclick='editelemet(${i})'>edit</button></td>
@@ -100,6 +123,7 @@
           }
 
           function generatepush() {
+
                let data = document.getElementById('input').value;
                array.push(data)
                pushdata(array)
@@ -126,12 +150,65 @@
           }
 
           function search(value) {
+               let findarray = []
+               for (let i = 0; i < array.length; i++) {
+
+                    if (array[i] == value) {
+                         findarray.push(array[i])
+                    }
+               }
+               pushdata(findarray)
+          }
+
+          // ******************************************************
+
+          function checkBoxClicked(evet, index) {
+
+               console.log(evet.checked)
+               if (evet.checked) {
+                    selectedRow.push(index)
+               } else {
+                    selectedRow.splice(index, 1)
+               }
+
+               let deleteallButton = document.getElementById('deleteall')
+
+               if (selectedRow.length > 0) {
+                    deleteallButton.style.display = "block"
+               } else {
+                    deleteallButton.style.display = "none"
+               }
+
+
+               console.log(selectedRow)
 
           }
 
 
+          function boxDelete() {
+
+               let deleteallButton = document.getElementById('deleteall')
+               let remaingItems = [];
+               for (let i = 0; i < array.length; i++) {
+                    if (!selectedRow.includes(i)) {
+                         remaingItems.push(array[i])
+                    }
+               }
+
+               pushdata(remaingItems)
+               array = remaingItems
+               selectedRow.length = 0
+
+
+               if (selectedRow.length > 0) {
+                    deleteallButton.style.display = "block"
+               } else {
+                    deleteallButton.style.display = "none"
+               }
+          }
 
      </script>
+
 </body>
 
 </html>

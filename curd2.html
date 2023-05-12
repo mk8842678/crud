@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          .box {
+               position: relative;
+               text-align: center;
+               width: 50%;
+               margin: 0 auto;
+          }
+
+          .box input {
+               height: 30px;
+               width: 200px;
+          }
+
+          .box #input1 {
+               height: 30px;
+               width: 165px
+          }
+
+          .box button {
+               padding: 4px 11px;
+               font-size: 16px;
+          }
+
+          table {
+               margin: 0 auto;
+               font-size: 25px;
+               border-collapse: collapse;
+               border: 1px solid black;
+               width: 50%;
+
+
+          }
+
+          table th {
+               padding: 0px 15px;
+          }
+
+          table tr th,
+          td {
+
+               border: 1px solid black;
+          }
+
+          tbody {
+               text-align: center;
+          }
+     </style>
+</head>
+
+<body>
+
+     <div class="box">
+
+          <input type="text" placeholder="data" id="input">
+          <button onclick="generatedata()">push</button>
+          <button onclick="updatedata()">update</button>
+          <input type="text" placeholder="search" id="search" onkeyup="searchdata(this.value)">
+
+     </div>
+
+     <table>
+          <tr>
+               <th>s.no</th>
+               <th>name</th>
+               <th>action</th>
+          </tr>
+
+          <tbody id="tablebody">
+
+          </tbody>
+     </table>
+
+     <script>
+
+          let arry = []
+          let selectedindex;
+
+          function generatehtml(data) {
+
+               let element = document.getElementById('tablebody');
+               let row = ''
+
+               for (let i = 0; i < data.length; i++) {
+
+                    row = row + `<tr>
+                         <td>${i + 1}</td>
+                         <td>${data[i]}</td>
+                         <td><button onclick='deletelement(${i})'>delet</button>
+                              <button onclick='editelement(${i})'>edit</button>
+                              </td>
+                         </tr>`
+               }
+               element.innerHTML = row
+          }
+
+          // *************************************
+
+          function generatedata() {
+
+               let data = document.getElementById('input').value;
+               arry.push(data)
+               generatehtml(arry)
+               document.getElementById('input').value = ''
+          }
+
+          // *****************************
+
+          function deletelement(index) {
+
+               arry.splice(index, 1)
+               generatehtml(arry)
+          }
+
+          // ****************************
+
+          function editelement(index) {
+
+               selectedindex = index
+               document.getElementById('input').value = arry[index]
+
+          }
+
+          // *************************************
+
+          function updatedata() {
+
+               let value = document.getElementById('input').value
+               arry[selectedindex] = value
+               generatehtml(arry)
+               document.getElementById('input').value = ''
+
+          }
+          // ****************************************
+
+          function searchdata(value) {
+
+               let findindex = []
+
+               for (let i = 0; i < arry.length; i++) {
+
+                    if (arry[i] == value) {
+
+                         findindex.push(arry[i])
+                    }
+               }
+               generatehtml(findindex)
+          }
+
+
+
+
+
+
+     </script>
+
+
+</body>
+
+</html>

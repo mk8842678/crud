@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          .table tr th {
+               padding: 0 4px;
+               font-size: 20px;
+          }
+     </style>
+</head>
+
+<body>
+
+     <div class="container">
+          <input type="text" placeholder="add here" id="input">
+          <button onclick="addElement()">add</button>
+
+          <div class="table">
+               <table>
+                    <tr>
+                         <th>s. no</th>
+                         <th>name</th>
+                         <th>action</th>
+                    </tr>
+                    <tbody id="tablebody">
+                    </tbody>
+               </table>
+          </div>
+     </div>
+
+     <div class="list-box">
+          <button onclick="generatelist()"></button>
+          <ul id="list">
+               <li>1</li>
+               <li>2</li>
+               <li>3</li>
+               <li>4</li>
+               <li>5</li>
+          </ul>
+     </div>
+
+     <div class="box-table">
+          <input type="text" placeholder="name" id="input1">
+          <input type="text" placeholder="search" id="input2" onkeyup="searchData(this.value)">
+
+          <button onclick="tablepush()">push</button>
+          <button onclick="updateTable()">Update</button>
+          <button onclick="searcharray()">search</button>
+          <table class="table" style="border: 2px solid;">
+               <tr style="border: 2px solid;">
+                    <th><input type="checkbox" placeholder="checkbox">checkbox</th>
+                    <th style="border: 2px solid;">s.no</th>
+                    <th style="border: 2px solid;">name</th>
+                    <th style="border: 2px solid;">action</th>
+               </tr>
+               <tbody id="tablebody1">
+
+
+               </tbody>
+          </table>
+
+
+     </div>
+
+     <script>
+
+          // let array = []
+
+          // function generateHTML(data) {
+
+          //      let element = document.getElementById('tablebody');
+          //      let row = ''
+
+          //      for (let i = 0; i < data.length; i++) {
+
+          //           row = row + `<tr>
+          //                <td>${i + 1}</td>
+          //                <td>${data[i]}</td>
+          //                <td><button onclick="deletdata(${i})">delet</button></td>
+          //                </tr>`
+          //      }
+          //      element.innerHTML = row
+          // }
+
+          // function addElement() {
+
+          //      let myData = document.getElementById('input').value;
+          //      array.push(myData)
+          //      generateHTML(array)
+          //      document.getElementById('input').value = ''
+
+          // }
+          // function deletdata(index) {
+          //      array.splice(index, 1)
+          //      generateHTML(array)
+
+
+          // }
+          // *****************************************************
+
+          let array2 = [1, 2, 3, 4, 5]
+
+          function generatelist(array2) {
+
+               let element = document.getElementById('list');
+               let list = ''
+               for (let i = 0; i <= array2.length; i++) {
+
+                    list = list + `<li>${array2[i]}</li>`
+               }
+               element.innerHTML = list
+
+          }
+          generatelist(array2)
+
+
+
+
+          // *********************************************************************************
+
+          let pusharray = []
+          let selectedIndex;
+          function generatepush(data) {
+
+               let element = document.getElementById('tablebody1');
+               let row = ''
+
+               for (let i = 0; i < data.length; i++) {
+
+                    row = row + `<tr>
+                         <td>
+                              <input type="checkbox" name="" id="${i + 1}">
+                         </td>
+                         <td>${i + 1}</td>
+                         <td>${data[i]}</td>
+                         <td><button onclick='deletelement(${i})'>delet</button><button onclick='editbutton(${i})'>edit</button></td>
+                         
+                         </tr>`
+               }
+
+               element.innerHTML = row
+          }
+
+
+          function tablepush() {
+
+
+               let myData = document.getElementById('input1').value;
+               pusharray.push(myData)
+               generatepush(pusharray)
+               document.getElementById('input1').value = ''
+          }
+
+          function deletelement(index) {
+
+               pusharray.splice(index, 1)
+               generatepush(pusharray)
+          }
+
+          function editbutton(index) {
+               selectedIndex = index
+               document.getElementById('input1').value = pusharray[index]
+
+          }
+
+          function updateTable() {
+               let value = document.getElementById('input1').value;
+               pusharray[selectedIndex] = value;
+               generatepush(pusharray)
+          }
+
+          function searcharray() {
+               let search = document.getElementById('input2').value;
+
+               let found = []
+               for (let i = 0; i < pusharray.length; i++) {
+
+                    if (pusharray[i] == search) {
+                         found.push(pusharray[i])
+
+                    }
+               }
+               if (search == '') {
+                    generatepush(pusharray)
+               } else {
+                    generatepush(found)
+
+               }
+
+          }
+
+          function searchData(value) {
+               let findvalue = []
+               for (let i = 0; i < pusharray.length; i++) {
+                    if (pusharray[i] == value) {
+                         findvalue.push(pusharray[i])
+                    } searchData
+               }
+               generatepush(findvalue)
+          }
+
+
+
+          // let array = [1, 2, 3, 4, 5]
+          // console.log(array[3])
+          //  array[2]=7
+
+
+
+
+
+
+          // *********************************************
+          let array1 = [1, 2, 3, 4, 5]
+
+          // array1[1]
+          // array1[2]
+          let result = array1.slice(1, 3)
+          console.log(result)
+          console.log(array1.splice(0, 2))
+          console.log(array1)
+
+
+
+     </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

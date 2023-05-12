@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+</head>
+
+<body>
+     <div class="container">
+          <input type="text" placeholder="name" id="input">
+          <button onclick="findelement()">click</button>
+
+          <div class="table">
+               <table>
+                    <tr>
+                         <th>s.no</th>
+                         <th>name</th>
+
+                    </tr>
+                    <tbody id="tablebody">
+
+                    </tbody>
+
+               </table>
+          </div>
+          <div class="box">
+               <input type="text" placeholder="name" id="name1">
+               <button onclick="findcrud()">push</button>
+          </div>
+          <div class="tabletr">
+               <table>
+                    <tr>
+                         <th>s.no</th>
+                         <th>name</th>
+                    </tr>
+                    <tbody id="tablename">
+
+                    </tbody>
+               </table>
+          </div>
+     </div>
+
+     <script>
+
+          let arrcrud = []
+          function genrate(data) {
+
+               let element = document.getElementById('tablename');
+               let row = ''
+
+               for (let i = 0; i < data.length; i++) {
+
+                    row = row + `<tr>
+                         <td>${i + 1}</td>
+                         <td>${data + [i]}</td>
+                         
+                         </tr>`
+
+               }
+               element.innerHTML = row
+          }
+
+          function findcrud() {
+
+               let myname = document.getElementById('name1').value;
+               arrcrud.push(myname)
+               genrate(arrcrud)
+               document.getElementById('name1').value = ''
+          }
+          // **************************************************
+          let array = []
+          function generateHTML(data) {
+
+               let element = document.getElementById('tablebody');
+               let row = ''
+
+               for (let i = 0; i < data.length; i++) {
+
+                    row = row + `<tr>
+                         <td>${i + 1}</td>
+                         <td>${data[i]}</td>
+                         <td><button onclick="deletelemet(${i})">delet</button></td>
+                         
+                         </tr>`
+               }
+               element.innerHTML = row
+          }
+          function findelement() {
+
+               let myData = document.getElementById('input').value;
+               array.push(myData)
+               generateHTML(array)
+               document.getElementById('input').value = ''
+
+          }
+          function deletelemet(index) {
+
+               array.splice(index, 1)
+               generateHTML(array)
+
+          }
+
+          // ********************************************
+
+          let arr = []
+
+          function generateHTML(data) {
+               let element = document.getElementById("tablebody");
+               let row = ""
+
+               for (let i = 0; i < data.length; i++) {
+                    row = row + ` <tr>
+                              <td>${i + 1}</td>
+                              <td>${data[i]}</td>
+                              <td> <button onclick="deleteElement(${i})">delete</button> </td>
+                         </tr>`
+               }
+
+               element.innerHTML = row
+          }
+
+          function addElement() {
+               let myData = document.getElementById("input").value
+               arr.push(myData)
+               generateHTML(arr)
+               document.getElementById("input").value = ""
+
+          }
+
+          function deleteElement(index) {
+               arr.splice(index, 1)
+               generateHTML(arr)
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     </script>
+
+
+</body>
+
+</html>

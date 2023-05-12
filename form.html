@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          .input-box {
+
+               height: 440px;
+               background: beige;
+               width: 18%;
+               /* text-align: center; */
+               text-align: end;
+               margin: 0 auto;
+               padding: 0 40px;
+               padding-left: 0px;
+
+          }
+
+          .input-box input {
+               padding: 5px 10px;
+               margin: 10px 0;
+          }
+
+          .input-box div {
+               text-align: center;
+               /* padding: 9px 0; */
+               color: red;
+               /* display: none; */
+          }
+
+          .input-box p {
+               text-align: center;
+               font-size: 22px;
+               padding: 19px 0;
+               margin: 0;
+          }
+
+          .input-box button {
+               font-size: 20px;
+               margin-left: 12px;
+               display: block;
+          }
+     </style>
+</head>
+
+<body>
+
+     <div class="input-box">
+
+          <p>Registration Form</p>
+          Username: <input type="name" id="name1">
+          <div id="data1">invalid data</div>
+          subject: <input type="text" id="name2">
+          <div id="data2">invalid data</div>
+          Email: <input type="email" id="name3">
+          <div id="data3">invalid data</div>
+          phone: <input type="phone" id="name4">
+          <div id="data4">invalid data</div>
+          password: <input type="password" id="name5">
+          <div id="data5">invalid data</div>
+          <button onclick="validateData()">submit</button>
+
+     </div>
+
+     <script>
+
+          function validateData() {
+
+               let input1 = document.getElementById('name1').value;
+               let input2 = document.getElementById('name2').value;
+               let input3 = document.getElementById('name3').value;
+               let input4 = document.getElementById('name4').value;
+               let input5 = document.getElementById('name5').value;
+
+               if (input1 == '') {
+                    document.getElementById('data1').style.display = 'block'
+               }
+               else {
+                    document.getElementById('data1').style.display = 'none'
+               }
+               if (input2 == '') {
+                    document.getElementById('data2').style.display = 'block'
+               }
+               else {
+                    document.getElementById('data2').style.display = 'none'
+               }
+               if (input3 == '') {
+                    document.getElementById('data3').style.display = 'block'
+               }
+               else {
+                    document.getElementById('data3').style.display = 'none'
+               }
+               if (input4 == '') {
+                    document.getElementById('data4').style.display = 'block'
+               }
+               else {
+                    document.getElementById('data4').style.display = 'none'
+               }
+               if (input5 == '') {
+                    document.getElementById('data5').style.display = 'block'
+               }
+               else {
+                    document.getElementById('data5').style.display = 'none'
+               }
+
+
+
+
+          }
+     </script>
+
+</body>
+
+</html>
